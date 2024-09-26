@@ -105,8 +105,8 @@ const PaymentPage = ({username}) => {
 <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
 
 <div className='cover w-full bg-red-50 relative'>
-      <img className="object-cover w-full h-[350px]" src={currentUser.coverpic} alt=''/>
-      <div className='absolute -bottom-16 right-[47%] border-white border-2 rounded-full size-32'>
+      <img className="object-cover w-full h-48 md:h-[350]" src={currentUser.coverpic} alt=''/>
+      <div className='absolute -bottom-16 right-[38%] md:right-[46%] border-white border-2 rounded-full size-36'>
         <img className='rounded-full object-cover size-28 overflow-hidden' width={100} height={100} src={currentUser.profilepic} alt='' />
       </div>
     </div>
@@ -121,8 +121,8 @@ const PaymentPage = ({username}) => {
     {payments.length} Payments . ₹{payments.reduce((a, b) => a + b.amount, 0)} raised
     </div>
 
-    <div className="payment flex gap-3 w-[80%] mt-11">
-      <div className="supporters w-1/2 bg-slate-900 rounded-lg p-10">
+    <div className="payment flex gap-3 w-[80%] mt-11 flex-col md:flex-row">
+      <div className="supporters w-full md:w-1/2 bg-slate-900 rounded-lg p-10">
         {/* Show list of all supporters as a leaderboard */}
         <h2 className="font-bold text-2xl my-5">Supporters</h2>
         <ul className='mx-5 text-lg'>
@@ -137,16 +137,16 @@ const PaymentPage = ({username}) => {
           })}
         </ul>
       </div>
-      <div className="makePayment w-1/2 bg-slate-900 rounded-lg p-10">
+      <div className="makePayment w-full md:w-1/2 bg-slate-900 rounded-lg p-10">
       <h2 className="text-2xl font-bold my-5">Make a Payment</h2>
       <div className='flex gap-2 flex-col'>
         <input onChange={handleChange} value={paymentform.name} name='name' type="text" className='w-full p-3 rounded-lg bg-slate-800' placeholder='Enter Name' />
         <input onChange={handleChange} value={paymentform.message} name='message' type="text" className='w-full p-3 rounded-lg bg-slate-800' placeholder='Enter Message' />
         <input onChange={handleChange} value={paymentform.amount} name='amount' type="text" className='w-full p-3 rounded-lg bg-slate-800' placeholder='Enter Amount' />
-        <button onClick={() => pay(Number.parseInt(paymentform.amount)*100)} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-slate-600 disabled:from-purple-100" disabled={paymentform.name?.length<3 || paymentform.message?.length<4}>Pay</button>
+        <button onClick={() => pay(Number.parseInt(paymentform.amount)*100)} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-slate-600 disabled:from-purple-100" disabled={paymentform.name?.length<3 || paymentform.message?.length<4 || paymentform.amount?.length<1}>Pay</button>
       </div>
       
-      <div className='flex gap-2 mt-5'>
+      <div className='flex flex-col md:flex-row gap-2 mt-5'>
         <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(1000)}>Pay ₹10</button>
         <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(2000)}>Pay ₹20</button>
         <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(3000)}>Pay ₹30</button>
